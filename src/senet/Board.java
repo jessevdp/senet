@@ -1,5 +1,7 @@
 package senet;
 
+import java.util.ArrayList;
+
 public class Board {
 	private Player[] squares;
 	
@@ -66,5 +68,15 @@ public class Board {
 			}
 		}
 		return count;
+	}
+	
+	public ArrayList<Integer> getPawnLocations(Player player) {
+		ArrayList<Integer> locations = new ArrayList<Integer>();
+		for (int i = 0; i < squares.length; i++) {
+			if(squares[i] == player) {
+				locations.add(i);
+			}
+		}
+		return locations;
 	}
 }

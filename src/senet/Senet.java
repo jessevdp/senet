@@ -1,5 +1,7 @@
 package senet;
 
+import java.util.ArrayList;
+
 public class Senet {
 	Player[] players;
 	Dice dice;
@@ -32,5 +34,9 @@ public class Senet {
 		// TEST Board.countPawns
 		int count = board.countPawns(players[0]);
 		System.out.println("Amount of pawns for player 1: " + count);
+		
+		// TEST: Board.getPawnLocations
+		ArrayList<Integer> locations = board.getPawnLocations(players[0]);
+		System.out.println("Locations of pawns for player 1: " + locations.toString() + " (this is 0 based)");
 	}
 }
