@@ -4,22 +4,17 @@ public class Player {
 	private String name;
 	private char colorsign;
 
-	public Player() {
-		
+	public Player(String name, char colorsign) {
+		this.name = name;
+		this.colorsign = colorsign;
 	}
 	
-	// name getter & setter
-	public void setName(String name) {
-		this.name = name;
-	}
+	// name getter
 	public String getName() {
 		return this.name;
 	}
 	
-	// colorsign getter & setter
-	public void setColorsign(char colorsign) {
-		this.colorsign = colorsign;
-	}
+	// colorsign getter
 	public char getColorsign() {
 		return this.colorsign;
 	}

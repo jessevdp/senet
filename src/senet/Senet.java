@@ -7,12 +7,7 @@ public class Senet {
 
 	public Senet() {
 		this.dice = new Dice();
-		
 		this.players = new Player[2];
-		for (int i = 0; i < players.length; i++) {
-			players[i] = new Player();
-		}
-		
 		this.board = new Board();
 	}
 	
@@ -24,8 +19,7 @@ public class Senet {
 		System.out.println("Dice throw: " + points);
 		
 		// TEST: Player
-		players[0].setName("John");
-		players[0].setColorsign('X');
+		players[0] = new Player("John", 'x');
 		System.out.print("Player print: ");
 		players[0].print();
 		System.out.print('\n');
