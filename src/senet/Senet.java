@@ -1,11 +1,14 @@
 package senet;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Senet {
 	Player[] players;
 	Dice dice;
 	Board board;
+	
+	Scanner scanner = new Scanner(System.in);
 
 	public Senet() {
 		this.dice = new Dice();
@@ -38,7 +41,7 @@ public class Senet {
 		System.out.println("Locations of pawns for player 1: " + locations.toString() + " (this is 0 based)");
 		
 		// TEST: this.playTurn()
-		playTurn(players[0]);
+		boolean success = playTurn(players[0]);
 	}
 	
 	/**
@@ -47,8 +50,15 @@ public class Senet {
 	 * @return success status of the turn
 	 */
 	private boolean playTurn(Player player) {
+		String prefix = player.getPrint();
 		System.out.println("\n========================================");
-		System.out.print("It's " + player.getPrint() + " their turn!\n");
+		System.out.println("It's " + prefix + " their turn!\n");
+		
+		// Dice throw
+		System.out.print(prefix + ", press <ENTER> to throw the dice");
+		scanner.nextLine(); // listen for newline
+		int num = dice.throwSticks();
+		System.out.println(prefix + ", you have thrown " + num);
 		
 		return true;
 	}
