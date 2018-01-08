@@ -23,7 +23,7 @@ public class Player {
 	 * Print the details of a Player
 	 * (uses System.out.print())
 	 */
-	public void print() {
-		System.out.print(this.name + " (" + this.colorsign + ")");
+	public String getPrint() {
+		return this.name + " (" + this.colorsign + ")";
 	}
 }

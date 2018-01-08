@@ -22,9 +22,7 @@ public class Senet {
 		// TEST: Player
 		players[0] = new Player("John", 'x');
 		players[1] = new Player("Jane", 'o');
-		System.out.print("Player print: ");
-		players[0].print();
-		System.out.print('\n');
+		System.out.println("Player print: " + players[0].getPrint());
 		
 		// TEST: Board
 		this.board = new Board(0, players[0], players[1]);
@@ -50,9 +48,7 @@ public class Senet {
 	 */
 	private boolean playTurn(Player player) {
 		System.out.println("\n========================================");
-		System.out.print("It's ");
-		player.print();
-		System.out.println(" their turn!\n");
+		System.out.print("It's " + player.getPrint() + " their turn!\n");
 		
 		return true;
 	}
