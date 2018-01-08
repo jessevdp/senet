@@ -38,5 +38,22 @@ public class Senet {
 		// TEST: Board.getPawnLocations
 		ArrayList<Integer> locations = board.getPawnLocations(players[0]);
 		System.out.println("Locations of pawns for player 1: " + locations.toString() + " (this is 0 based)");
+		
+		// TEST: this.playTurn()
+		playTurn(players[0]);
+	}
+	
+	/**
+	 * Play a turn with a certain player
+	 * @param player
+	 * @return success status of the turn
+	 */
+	private boolean playTurn(Player player) {
+		System.out.println("\n========================================");
+		System.out.print("It's ");
+		player.print();
+		System.out.println(" their turn!\n");
+		
+		return true;
 	}
 }
