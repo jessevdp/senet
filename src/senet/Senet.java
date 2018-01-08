@@ -28,5 +28,9 @@ public class Senet {
 		this.board = new Board(0, players[0], players[1]);
 		System.out.println("Board print:");
 		board.print();
+		
+		// TEST Board.countPawns
+		int count = board.countPawns(players[0]);
+		System.out.println("Amount of pawns for player 1: " + count);
 	}
 }

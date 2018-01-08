@@ -52,4 +52,19 @@ public class Board {
 		char character = square.getColorsign();
 		System.out.print(character);
 	}
+	
+	/**
+	 * Counts the amount of pawns a player has on the board
+	 * @param player
+	 * @return count
+	 */
+	public int countPawns(Player player) {
+		int count = 0;
+		for (int i = 0; i < squares.length; i++) {
+			if(squares[i] == player) {
+				count += 1;
+			}
+		}
+		return count;
+	}
 }
