@@ -3,12 +3,21 @@ package senet;
 public class Board {
 	private Player[] squares;
 	
-	public Board(Player[] squares) {
-		this.squares = squares;
-	}
-	
-	public Board() {
-		this.squares = new Player[30];
+	public Board(int num, Player b, Player w) {
+		switch (num) {
+		case 1:
+			this.squares = new Player[]{b,w,null,w,null,w,null,b,null,w, null,w,null,w,null,b,w,w,null,w, w,null,b,w,w,w,null,null,null,null};
+			break;
+		case 2:
+			this.squares = new Player[]{null,null,null,null,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null, null,w,w,w,null,null,null,null,b,null};
+			break;
+		case 3:
+			this.squares = new Player[]{null,null,null,null,null,w,null,null,null,null, null,null,b,null,null,null,null,w,null,null, null,w,null,null,b,b,null,b,b,null};
+			break;
+		default:
+			this.squares = new Player[]{w,b,w,b,w,b,w,b,w,b, null,null,null,null,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null};
+			break;
+		}
 	}
 	
 	public void print() {

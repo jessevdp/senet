@@ -8,7 +8,6 @@ public class Senet {
 	public Senet() {
 		this.dice = new Dice();
 		this.players = new Player[2];
-		this.board = new Board();
 	}
 	
 	public void play() {
@@ -20,11 +19,13 @@ public class Senet {
 		
 		// TEST: Player
 		players[0] = new Player("John", 'x');
+		players[1] = new Player("Jane", 'o');
 		System.out.print("Player print: ");
 		players[0].print();
 		System.out.print('\n');
 		
 		// TEST: Board
+		this.board = new Board(0, players[0], players[1]);
 		System.out.println("Board print:");
 		board.print();
 	}
