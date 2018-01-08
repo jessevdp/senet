@@ -31,6 +31,7 @@ public class Senet {
 		System.out.print('\n');
 		
 		// TEST: Board
+		System.out.println("Board print:");
 		board.print();
 	}
 }
