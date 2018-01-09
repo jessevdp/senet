@@ -93,7 +93,44 @@ public class Board {
 	 * @return success status of the move
 	 */
 	public boolean move(int location, int amount, Player player) {
-		System.out.println("\nOeps, that move aint possible...");
+		int dest = location + amount;
+		
+		if (dest > (squares.length - 1)) { // -1 to compensate for the fact that the array is 0 based
+			System.out.println("\nOeps, not possible. That move would go off the board...");
+			return false;
+		}
+		
+		Player destination = squares[dest];
+		
+		if (destination == player) {
+			System.out.println("\nOeps, not possible. One of your own pawns occupies square " + dest + "...");
+			return false;
+		}
+		
+		if (dest == (squares.length - 1) // -1 to compensate for the fact that the array is 0 based
+				&& !allPawnsInLastRow(player)) {
+			System.out.println("\nOeps, not possible. Not all of your pawns have made it to the final row yet...");
+			return false;
+		}
+		
+		if (dest == (squares.length - 1)) { // -1 to compensate for the fact that the array is 0 based
+			squares[location] = null;
+			return true;
+		}
+		
+		// Swap the destination with the current location
+		Player occupant = squares[dest];
+		squares[dest] = player;
+		squares[location] = occupant;
+		return true;
+	}
+	
+	private boolean allPawnsInLastRow(Player player) {
+		ArrayList<Integer> pawns = getPawnLocations(player);
+		int first = pawns.get(0);
+		if (first > 19) {
+			return true;
+		}
 		return false;
 	}
 }
