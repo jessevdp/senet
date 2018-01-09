@@ -32,7 +32,7 @@ public class Senet {
 			current ^= 1; // XOR to switch between players
 			
 			// Play a turn
-			boolean success = playTurn(players[current]);
+			playTurn(players[current]);
 		}
 	}
 	
@@ -72,9 +72,8 @@ public class Senet {
 	/**
 	 * Play a turn with a certain player
 	 * @param player
-	 * @return success status of the turn
 	 */
-	private boolean playTurn(Player player) {
+	private void playTurn(Player player) {
 		String prefix = player.getPrint();
 		int num = dice.throwSticks();
 		ArrayList<Integer> pawns = board.getPawnLocations(player);
@@ -94,8 +93,6 @@ public class Senet {
 		System.out.println('\n' + prefix + ", which piece do you want to move? " + getPawnLocationsPrint(pawns));
 		int selectedPawn = selectPawn(pawns);
 		System.out.println(prefix + ", you selected the piece on square: " + (selectedPawn + 1));
-		
-		return true;
 	}
 	
 	/**
