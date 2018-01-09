@@ -40,8 +40,40 @@ public class Senet {
 		ArrayList<Integer> locations = board.getPawnLocations(players[0]);
 		System.out.println("Locations of pawns for player 1: " + locations.toString() + " (this is 0 based)");
 		
+		// TEST: this.getPlayers
+		players = getPlayers();
+		
 		// TEST: this.playTurn()
 		boolean success = playTurn(players[0]);
+	}
+	
+	private Player[] getPlayers() {
+		Player[] players = new Player[2];
+		String[] names = new String[2];
+		
+		System.out.print("Enter the name of the first player: ");
+		names[0] = input.scanner.next();
+		System.out.print("Enter the name of the second player: ");
+		names[1] = input.scanner.next();
+		
+		System.out.println(); // blank line
+		input.scanner.nextLine(); // Clear the keyboard buffer
+		
+		int player = 0;
+		while(true) {
+			int n = dice.throwSticks();
+			System.out.println(names[player] + " has thrown " + n);
+			if(n == 1) {
+				break;
+			}
+			player ^= 1; // XOR switch
+		}
+		System.out.println(names[player] + " starts the game!");
+		
+		players[0] = new Player(names[player], 'x');
+		players[1] = new Player(names[(player ^ 1)], 'o'); // XOR to select the other name
+		
+		return players;
 	}
 	
 	/**
