@@ -16,6 +16,8 @@ public class Senet {
 	}
 	
 	public void play() {
+		Player winner = null;
+		
 		System.out.println("Let's play Senet!");
 		
 		// Get our players
@@ -24,8 +26,14 @@ public class Senet {
 		// Prepare our board
 		this.board = new Board(0, players[0], players[1]);
 		
-		// Play a turn
-		boolean success = playTurn(players[1]);
+		
+		int current = 0;
+		while(winner == null) {
+			current ^= 1; // XOR to switch between players
+			
+			// Play a turn
+			boolean success = playTurn(players[current]);
+		}
 	}
 	
 	/**
