@@ -30,9 +30,10 @@ public class Senet {
 		int current = 0;
 		while(winner == null) {
 			current ^= 1; // XOR to switch between players
+			Player player = players[current];
 			
 			// Play a turn
-			playTurn(players[current]);
+			playTurn(player);
 		}
 	}
 	
