@@ -20,12 +20,18 @@ public class Senet {
 		
 		System.out.println("Let's play Senet!");
 		
+		int mode = getGameMode();
+		
 		// Get our players
-		players = getPlayers();
+		if (mode == 0) {
+			this.players = getPlayers();
+		} else {
+			this.players[0] = new Player("John", 'x');
+			this.players[1] = new Player("Jane", 'o');
+		}
 		
 		// Prepare our board
-		this.board = new Board(0, players[0], players[1]);
-		
+		this.board = new Board(mode, players[0], players[1]);
 		
 		int current = 0;
 		while(winner == null) {
@@ -43,6 +49,20 @@ public class Senet {
 		System.out.println('\n' + "=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=");
 		System.out.println(winner.getPrint() + " won the game!");
 		System.out.println("=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=");
+	}
+	
+	private int getGameMode() {
+		int mode;
+		
+		System.out.println('\n' + "Before we start. Would you like to start a normal game (0) or would you like to start a test position? (1-2-3)");
+		 while (true) {
+			 mode = input.getInt();
+			 if (mode == 0 || mode == 1 || mode == 2 || mode == 3) {
+				 break;
+			 }
+			 System.out.println("Oeps, that's not an option... Try again?");
+		 }
+		return mode;
 	}
 	
 	/**
