@@ -8,7 +8,7 @@ public class Senet {
 	Dice dice;
 	Board board;
 	
-	Scanner scanner = new Scanner(System.in);
+	Input input = new Input();
 
 	public Senet() {
 		this.dice = new Dice();
@@ -61,11 +61,11 @@ public class Senet {
 		
 		// Dice throw
 		System.out.print(prefix + ", press <ENTER> to throw the dice");
-		scanner.nextLine(); // listen for newline
+		input.scanner.nextLine(); // listen for newline
 		System.out.println(prefix + ", you have thrown " + num);
 		
 		System.out.print(prefix + ", which piece do you want to move? " + getPawnLocationsPrint(pawns) + " : ");
-		int selectedPawn = scanner.nextInt() - 1; // -1 since the array starts at 0
+		int selectedPawn = input.getPositiveInt() - 1; // -1 since the array starts at 0;
 		System.out.println(prefix + ", you selected the piece on square: " + (selectedPawn + 1));
 		
 		return true;
