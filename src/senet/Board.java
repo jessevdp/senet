@@ -118,6 +118,25 @@ public class Board {
 			return true;
 		}
 		
+		if (dest == (27 - 1)) { // -1 to compensate for the fact that the array is 0 based
+			System.out.println("\nTrapdoor! Sending this pawn back to the beginning...");
+			
+			int i = 0;
+			while (true) {
+				if (i >= squares.length) {
+					System.out.println("\nOeps, not possible.");
+					return false;
+				}
+				if (squares[i] == null) {
+					squares[i] = player;
+					squares[location] = null;
+					return true;
+				}
+				
+				i += 1;
+			}
+		}
+		
 		// Swap the destination with the current location
 		Player occupant = squares[dest];
 		squares[dest] = player;
