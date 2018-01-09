@@ -47,6 +47,10 @@ public class Senet {
 		boolean success = playTurn(players[0]);
 	}
 	
+	/**
+	 * Get the names of the two players and decide who get's to go first
+	 * @return players
+	 */
 	private Player[] getPlayers() {
 		Player[] players = new Player[2];
 		String[] names = new String[2];
@@ -71,7 +75,7 @@ public class Senet {
 		System.out.println(names[player] + " starts the game!");
 		
 		players[0] = new Player(names[player], 'x');
-		players[1] = new Player(names[(player ^ 1)], 'o'); // XOR to select the other name
+		players[1] = new Player(names[(player ^ 1)], 'o'); // XOR (^) to select the other name
 		
 		return players;
 	}
