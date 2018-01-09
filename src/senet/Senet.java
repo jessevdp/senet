@@ -1,7 +1,6 @@
 package senet;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Senet {
 	Player[] players;
