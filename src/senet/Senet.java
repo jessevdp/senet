@@ -76,8 +76,10 @@ public class Senet {
 		System.out.println("\n========================================");
 		System.out.println("It's " + prefix + " their turn!\n");
 		
+		board.print();
+		
 		// Dice throw
-		System.out.print(prefix + ", press <ENTER> to throw the dice");
+		System.out.print('\n' + prefix + ", press <ENTER> to throw the dice");
 		input.scanner.nextLine(); // listen for newline
 		System.out.println(prefix + ", you have thrown " + num);
 		
