@@ -84,4 +84,16 @@ public class Board {
 		}
 		return locations;
 	}
+	
+	/**
+	 * Move the pawn on a given location a certain amount of pawns
+	 * @param location
+	 * @param amount
+	 * @param player
+	 * @return success status of the move
+	 */
+	public boolean move(int location, int amount, Player player) {
+		System.out.println("\nOeps, that move aint possible...");
+		return false;
+	}
 }

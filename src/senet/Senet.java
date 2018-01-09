@@ -86,6 +86,7 @@ public class Senet {
 		String prefix = player.getPrint();
 		int num = dice.throwSticks();
 		ArrayList<Integer> pawns = board.getPawnLocations(player);
+		boolean success = false;
 		
 		
 		// Announcement
@@ -99,9 +100,29 @@ public class Senet {
 		input.scanner.nextLine(); // listen for newline
 		System.out.println(prefix + ", you have thrown " + num);
 		
-		System.out.println('\n' + prefix + ", which piece do you want to move? " + getPawnLocationsPrint(pawns));
-		int selectedPawn = selectPawn(pawns);
-		System.out.println(prefix + ", you selected the piece on square: " + (selectedPawn + 1));
+		while (!success && (pawns.size() > 0)) {
+			// Pawn selection
+			System.out.println('\n' + prefix + ", which piece do you want to move? " + getPawnLocationsPrint(pawns));
+			int selectedPawn = selectPawn(pawns);
+			System.out.println(prefix + ", you selected the piece on square: " + (selectedPawn + 1));
+			
+			success = board.move(selectedPawn, num, player);
+			
+			// Remove this location from the possible locations if the move failed
+			if (!success) {
+				int i = pawns.indexOf(selectedPawn);
+				pawns.remove(i);
+			}
+		}
+		
+		// print the result of the turn
+		if (success) {
+			System.out.println(); // blank line
+			board.print();
+		} else {
+			System.out.println('\n' + "It seems you're out of moves...");
+			System.out.println("Passing the turn to the other player");
+		}
 	}
 	
 	/**
