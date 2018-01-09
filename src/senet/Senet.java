@@ -51,15 +51,40 @@ public class Senet {
 	 */
 	private boolean playTurn(Player player) {
 		String prefix = player.getPrint();
+		int num = dice.throwSticks();
+		ArrayList<Integer> pawns = board.getPawnLocations(player);
+		
+		
+		// Announcement
 		System.out.println("\n========================================");
 		System.out.println("It's " + prefix + " their turn!\n");
 		
 		// Dice throw
 		System.out.print(prefix + ", press <ENTER> to throw the dice");
 		scanner.nextLine(); // listen for newline
-		int num = dice.throwSticks();
 		System.out.println(prefix + ", you have thrown " + num);
 		
+		System.out.print(prefix + ", which piece do you want to move? " + getPawnLocationsPrint(pawns) + " : ");
+		int selectedPawn = scanner.nextInt() - 1; // -1 since the array starts at 0
+		System.out.println(prefix + ", you selected the piece on square: " + (selectedPawn + 1));
+		
 		return true;
+	}
+	
+	/**
+	 * Get the print for the locations of the pawns
+	 * This includes adding 1 to compensate for the 0 based array.
+	 * @param pawns
+	 * @return print
+	 */
+	private String getPawnLocationsPrint(ArrayList<Integer> pawns) {
+		String print = "";
+		for (int i = 0; i < pawns.size(); i++) {
+			if (i != 0) {
+				print += "-";
+			}
+			print += pawns.get(i) + 1; // +1 since the array starts at 0
+		}
+		return "(" + print + ")";
 	}
 }
