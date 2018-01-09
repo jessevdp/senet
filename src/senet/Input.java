@@ -10,17 +10,21 @@ public class Input {
 		this.scanner = new Scanner(System.in);
 	}
 	
-	public int getPositiveInt() {
-		int i = -1;
-		while (i < 0) {
+	public int getIntAbove(int num) {
+		int i = num;
+		while (i < (num + 1)) {
 			try {
+				System.out.print("Enter a number : ");
 				i = scanner.nextInt();
 			} catch (InputMismatchException ime) {
-				System.out.print("That's not a number, try again? : ");
+				System.out.println("Oeps, that's not a number... Try again?");
 				scanner.nextLine(); // Clear the keyboard buffer
+				continue;
+			}
+			if (i < (num + 1)) {
+				System.out.println("Oeps, that's not high enough... Try again?");
 			}
 		}
 		return i;
 	}
-
 }
