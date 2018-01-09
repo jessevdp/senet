@@ -35,7 +35,15 @@ public class Senet {
 			
 			// Play a turn
 			playTurn(player);
+			
+			int count = board.countPawns(player);
+			if (count == 0) {
+				winner = player;
+			}
 		}
+		System.out.println('\n' + "=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=");
+		System.out.println(winner.getPrint() + " won the game!");
+		System.out.println("=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=");
 	}
 	
 	/**
