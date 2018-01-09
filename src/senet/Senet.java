@@ -25,7 +25,7 @@ public class Senet {
 		this.board = new Board(0, players[0], players[1]);
 		
 		// Play a turn
-		boolean success = playTurn(players[0]);
+		boolean success = playTurn(players[1]);
 	}
 	
 	/**

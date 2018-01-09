@@ -17,7 +17,7 @@ public class Board {
 			this.squares = new Player[]{null,null,null,null,null,w,null,null,null,null, null,null,b,null,null,null,null,w,null,null, null,w,null,null,b,b,null,b,b,null};
 			break;
 		default:
-			this.squares = new Player[]{w,b,w,b,w,b,w,b,w,b, null,null,null,null,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null};
+			this.squares = new Player[]{w,b,w,b,w,b,w,b,w,null, b,null,null,null,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null};
 			break;
 		}
 	}
