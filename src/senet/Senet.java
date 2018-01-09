@@ -19,6 +19,7 @@ public class Senet {
 		Player winner = null;
 		
 		System.out.println("Let's play Senet!");
+		System.out.println("=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=");
 		
 		// Get our players
 		players = getPlayers();
