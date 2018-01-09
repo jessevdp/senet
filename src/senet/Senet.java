@@ -64,7 +64,7 @@ public class Senet {
 		input.scanner.nextLine(); // listen for newline
 		System.out.println(prefix + ", you have thrown " + num);
 		
-		System.out.println(prefix + ", which piece do you want to move? " + getPawnLocationsPrint(pawns));
+		System.out.println('\n' + prefix + ", which piece do you want to move? " + getPawnLocationsPrint(pawns));
 		int selectedPawn = selectPawn(pawns);
 		System.out.println(prefix + ", you selected the piece on square: " + (selectedPawn + 1));
 		
@@ -88,6 +88,12 @@ public class Senet {
 		return "(" + print + ")";
 	}
 	
+	/**
+	 * Prompts the user to select a pawn out of a certain range
+	 * of pawns.
+	 * @param pawns
+	 * @return
+	 */
 	private int selectPawn(ArrayList<Integer> pawns) {
 		int selectedPawn;
 		while(true) {
