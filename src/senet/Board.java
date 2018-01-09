@@ -70,6 +70,11 @@ public class Board {
 		return count;
 	}
 	
+	/**
+	 * Get the locations of the pawns of a player
+	 * @param player
+	 * @return A list with the locations
+	 */
 	public ArrayList<Integer> getPawnLocations(Player player) {
 		ArrayList<Integer> locations = new ArrayList<Integer>();
 		for (int i = 0; i < squares.length; i++) {
