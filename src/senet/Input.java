@@ -21,6 +21,7 @@ public class Input {
 				scanner.nextLine(); // Clear the keyboard buffer
 				continue;
 			}
+			scanner.nextLine(); // Clear the keyboard buffer
 			break;
 		}
 		return i;
