@@ -91,7 +91,7 @@ public class Senet {
 	private int selectPawn(ArrayList<Integer> pawns) {
 		int selectedPawn = 0;
 		while(true) {
-			selectedPawn = input.getIntAbove(0) - 1; // -1 since the array starts at 0;
+			selectedPawn = input.getInt() - 1; // -1 since the array starts at 0;
 			if(pawns.indexOf(selectedPawn) > -1) {
 				break;
 			}

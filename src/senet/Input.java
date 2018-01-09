@@ -10,9 +10,9 @@ public class Input {
 		this.scanner = new Scanner(System.in);
 	}
 	
-	public int getIntAbove(int num) {
-		int i = num;
-		while (i < (num + 1)) {
+	public int getInt() {
+		int i;
+		while (true) {
 			try {
 				System.out.print("Enter a number : ");
 				i = scanner.nextInt();
@@ -21,9 +21,7 @@ public class Input {
 				scanner.nextLine(); // Clear the keyboard buffer
 				continue;
 			}
-			if (i < (num + 1)) {
-				System.out.println("Oeps, that's not high enough... Try again?");
-			}
+			break;
 		}
 		return i;
 	}
