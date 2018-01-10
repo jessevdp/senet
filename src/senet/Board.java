@@ -103,7 +103,12 @@ public class Board {
 		Player destination = squares[dest];
 		
 		if (destination == player) {
-			System.out.println("\nOeps, not possible. One of your own pawns occupies square " + dest + "...");
+			System.out.println("\nOeps, not possible. One of your own pawns occupies square " + (dest + 1) + "...");
+			return false;
+		}
+		
+		if (destination != null&& (squares[dest + 1] != null || squares[dest - 1] != null)) {
+			System.out.println("\nOeps, not possible. Square " + (dest + 1) + " contains a safe pawn...");
 			return false;
 		}
 		
