@@ -127,11 +127,9 @@ public class Senet {
 			
 			success = board.move(selectedPawn, n, player);
 			
-			// Remove this location from the possible locations if the move failed
-			if (!success) {
-				int i = pawns.indexOf(selectedPawn);
-				pawns.remove(i);
-			}
+			// Remove this location from the possible locations
+			int i = pawns.indexOf(selectedPawn);
+			pawns.remove(i);
 		}
 		
 		// print the result of the turn
@@ -139,7 +137,7 @@ public class Senet {
 			System.out.println(); // blank line
 			board.print();
 			
-			if (n == 1 || n == 4 || n == 6) {
+			if ((n == 1 || n == 4 || n == 6) && (pawns.size() > 0)) {
 				System.out.println('\n' + prefix + ", because you threw " + n + " you get another turn!");
 				playTurn(player);
 			}
