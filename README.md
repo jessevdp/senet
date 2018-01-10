@@ -4,3 +4,6 @@ My version of the ancient game of Senet. This project is for a school assignment
 > Senet is a board game from ancient Egypt whose original rules are the subject of conjecture.
 > The oldest hieroglyph resembling a senet game dates to around 3100 BC.
 > The full name of the game in Egyptian is thought to have been zn.t n.t ḥˁb, meaning the "game of passing". — [Wikipedia](https://en.wikipedia.org/wiki/Senet)
+
+## IDE
+This project was created using the [eclipse](https://www.eclipse.org/) IDE and was only ever tested using that IDE.
