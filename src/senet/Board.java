@@ -100,6 +100,20 @@ public class Board {
 			return false;
 		}
 		
+		int enemies = 0;
+		for (int i = (location + 1); i < dest; i++) {
+			if (squares[i] != null && squares[i] != player) {
+				enemies += 1;
+			} else {
+				enemies = 0;
+			}
+
+			if (enemies == 3) {
+				System.out.println("\nOeps, not possible. You can't jump over 3 enemy pawns in a row");
+				return false;
+			}
+		}
+		
 		Player destination = squares[dest];
 		
 		if (destination == player) {
