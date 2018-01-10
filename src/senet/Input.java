@@ -1,5 +1,6 @@
 package senet;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -10,20 +11,30 @@ public class Input {
 		this.scanner = new Scanner(System.in);
 	}
 	
-	public int getInt() {
+	public int selectInt (int[] options) {
 		int i;
+		String question = "Choose a number " + getOptionsPrint(options) +" : ";
+		
 		while (true) {
 			try {
-				System.out.print("Enter a number : ");
+				System.out.print(question);
 				i = scanner.nextInt();
+				if (Arrays.binarySearch(options, i) > -1) {
+					scanner.nextLine(); // Clear the keyboard buffer
+					return i;
+				}
 			} catch (InputMismatchException ime) {
-				System.out.println("Oeps, that's not a number... Try again?");
 				scanner.nextLine(); // Clear the keyboard buffer
-				continue;
 			}
-			scanner.nextLine(); // Clear the keyboard buffer
-			break;
+			System.out.println("Oeps, that's not an option... Try again?");
 		}
-		return i;
+	}
+	
+	private String getOptionsPrint (int[] options) {
+		String print = "";
+		for (int i = 0; i < options.length; i++) {
+			print += (i == 0) ? options[i] : "-" + options[i];
+		}
+		return "(" + print + ")";
 	}
 }
