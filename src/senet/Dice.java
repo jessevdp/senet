@@ -3,10 +3,6 @@ package senet;
 import java.util.Random;
 
 public class Dice {
-
-	public Dice() {
-		
-	}
 	
 	/**
 	 * A dice throw that can only return a certain set of integers

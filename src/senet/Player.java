@@ -4,24 +4,22 @@ public class Player {
 	private String name;
 	private char colorsign;
 
-	public Player(String name, char colorsign) {
+	public Player (String name, char colorsign) {
 		this.name = name;
 		this.colorsign = colorsign;
 	}
 	
-	// name getter
-	public String getName() {
-		return this.name;
-	}
-	
-	// colorsign getter
+	/**
+	 * Get's the colorsign of the player
+	 * @return colorsign
+	 */
 	public char getColorsign() {
 		return this.colorsign;
 	}
 	
 	/**
-	 * Print the details of a Player
-	 * (uses System.out.print())
+	 * Get's the print string of the player
+	 * @return print (name + colorsign)
 	 */
 	public String getPrint() {
 		return this.name + " (" + this.colorsign + ")";

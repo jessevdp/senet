@@ -1,12 +1,10 @@
 package senet;
 
-import java.util.ArrayList;
-
 public class Board {
 	private Player[] squares;
 	
-	public Board(int num, Player b, Player w) {
-		switch (num) {
+	public Board(int n, Player b, Player w) {
+		switch (n) {
 		case 1:
 			this.squares = new Player[]{b,w,null,w,null,w,null,b,null,w, null,w,null,w,null,b,w,w,null,w, w,null,b,w,w,w,null,null,null,null};
 			break;
@@ -55,121 +53,4 @@ public class Board {
 		System.out.print(character);
 	}
 	
-	/**
-	 * Counts the amount of pawns a player has on the board
-	 * @param player
-	 * @return count
-	 */
-	public int countPawns(Player player) {
-		int count = 0;
-		for (int i = 0; i < squares.length; i++) {
-			if(squares[i] == player) {
-				count += 1;
-			}
-		}
-		return count;
-	}
-	
-	/**
-	 * Get the locations of the pawns of a player
-	 * @param player
-	 * @return A list with the locations
-	 */
-	public ArrayList<Integer> getPawnLocations(Player player) {
-		ArrayList<Integer> locations = new ArrayList<Integer>();
-		for (int i = 0; i < squares.length; i++) {
-			if(squares[i] == player) {
-				locations.add(i);
-			}
-		}
-		return locations;
-	}
-	
-	/**
-	 * Move the pawn on a given location a certain amount of pawns
-	 * @param location
-	 * @param amount
-	 * @param player
-	 * @return success status of the move
-	 */
-	public boolean move(int location, int amount, Player player) {
-		int dest = location + amount;
-		
-		if (dest > (squares.length - 1)) { // -1 to compensate for the fact that the array is 0 based
-			System.out.println("\nOeps, not possible. That move would go off the board...");
-			return false;
-		}
-		
-		int enemies = 0;
-		for (int i = (location + 1); i < dest; i++) {
-			enemies = (squares[i] != null && squares[i] != player) ? (enemies + 1) : 0;
-			
-			if (enemies == 3) {
-				System.out.println("\nOeps, not possible. You can't jump over 3 enemy pawns in a row...");
-				return false;
-			}
-		}
-		
-		Player destination = squares[dest];
-		
-		if (destination == player) {
-			System.out.println("\nOeps, not possible. One of your own pawns occupies square " + (dest + 1) + "...");
-			return false;
-		}
-		
-		if (destination != null && ((squares[dest - 1] != null && squares[dest - 1] != player) || (squares[dest + 1] != null && squares[dest + 1] != player))) {
-			System.out.println("\nOeps, not possible. Square " + (dest + 1) + " contains a safe pawn...");
-			return false;
-		}
-		
-		if (destination != null && (dest == (26 - 1) || dest == (28 - 1) || dest == (29 - 1))) {
-			System.out.println("\nOeps, not possible. You can't attack a pawn on square " + (dest + 1) + "...");
-			return false;
-		}
-		
-		if (dest == (squares.length - 1) // -1 to compensate for the fact that the array is 0 based
-				&& !allPawnsInLastRow(player)) {
-			System.out.println("\nOeps, not possible. Not all of your pawns have made it to the final row yet...");
-			return false;
-		}
-		
-		if (dest == (squares.length - 1)) { // -1 to compensate for the fact that the array is 0 based
-			squares[location] = null;
-			return true;
-		}
-		
-		if (dest == (27 - 1)) { // -1 to compensate for the fact that the array is 0 based
-			System.out.println("\nTrapdoor! Sending this pawn back to the beginning...");
-			
-			int i = 0;
-			while (true) {
-				if (i >= squares.length) {
-					System.out.println("\nOeps, not possible.");
-					return false;
-				}
-				if (squares[i] == null) {
-					squares[i] = player;
-					squares[location] = null;
-					return true;
-				}
-				
-				i += 1;
-			}
-		}
-		
-		// Swap the destination with the current location
-		Player occupant = squares[dest];
-		squares[dest] = player;
-		squares[location] = occupant;
-		return true;
-	}
-	
-	private boolean allPawnsInLastRow(Player player) {
-		ArrayList<Integer> pawns = getPawnLocations(player);
-		int first = pawns.get(0);
-		if (first > 19) {
-			return true;
-		}
-		return false;
-	}
 }
