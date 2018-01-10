@@ -103,7 +103,7 @@ public class Senet {
 	 */
 	private void playTurn(Player player) {
 		String prefix = player.getPrint();
-		int num = dice.throwSticks();
+		int n = dice.throwSticks();
 		ArrayList<Integer> pawns = board.getPawnLocations(player);
 		boolean success = false;
 		
@@ -117,7 +117,7 @@ public class Senet {
 		// Dice throw
 		System.out.print('\n' + prefix + ", press <ENTER> to throw the dice");
 		input.scanner.nextLine(); // listen for newline
-		System.out.println(prefix + ", you have thrown " + num);
+		System.out.println(prefix + ", you have thrown " + n);
 		
 		while (!success && (pawns.size() > 0)) {
 			// Pawn selection
@@ -125,7 +125,7 @@ public class Senet {
 			int selectedPawn = selectPawn(pawns);
 			System.out.println(prefix + ", you selected the piece on square: " + (selectedPawn + 1));
 			
-			success = board.move(selectedPawn, num, player);
+			success = board.move(selectedPawn, n, player);
 			
 			// Remove this location from the possible locations if the move failed
 			if (!success) {
@@ -138,6 +138,11 @@ public class Senet {
 		if (success) {
 			System.out.println(); // blank line
 			board.print();
+			
+			if (n == 1 || n == 4 || n == 6) {
+				System.out.println('\n' + prefix + ", because you threw " + n + " you get another turn!");
+				playTurn(player);
+			}
 		} else {
 			System.out.println('\n' + "It seems you're out of moves...");
 			System.out.println("Passing the turn to the other player");
