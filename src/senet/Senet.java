@@ -8,7 +8,7 @@ public class Senet {
 	}
 	
 	public void play () {
-		System.out.println(dice.throwSticks());
+		
 	}
 	
 }
