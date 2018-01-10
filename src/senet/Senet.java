@@ -32,7 +32,12 @@ public class Senet {
 		// Prepare our board
 		this.board = new Board(mode, players[0], players[1]);
 		
-		int current = 0;
+		int current = 1;
+		
+		if (mode == 0) {
+			playFirstTurn(players[current]);
+		}
+		
 		while(winner == null) {
 			current ^= 1; // XOR to switch between players
 			Player player = players[current];
@@ -95,6 +100,28 @@ public class Senet {
 		players[1] = new Player(names[(player ^ 1)], 'o'); // XOR (^) to select the other name
 		
 		return players;
+	}
+	
+	private void playFirstTurn(Player player) {
+		String prefix = player.getPrint();
+		int n = dice.throwSticks();
+		
+		System.out.println("\n========================================");
+		System.out.println("It's " + prefix + " their turn!\n");
+		
+		board.print();
+		
+		// Dice throw
+		System.out.print('\n' + prefix + ", press <ENTER> to throw the dice");
+		input.scanner.nextLine(); // listen for newline
+		System.out.println(prefix + ", you have thrown " + n);
+		
+		System.out.println('\n' + "You need to move the pawn in square 9. That's the rule\n");
+		
+		// Move
+		board.move((9 - 1), n, player);
+		
+		board.print();
 	}
 	
 	/**
