@@ -117,7 +117,7 @@ public class Board {
 			return false;
 		}
 		
-		if (destination != null && (squares[dest + 1] != null || squares[dest - 1] != null)) {
+		if (destination != null && ((squares[dest - 1] != null && squares[dest - 1] != player) || (squares[dest + 1] != null && squares[dest + 1] != player))) {
 			System.out.println("\nOeps, not possible. Square " + (dest + 1) + " contains a safe pawn...");
 			return false;
 		}
