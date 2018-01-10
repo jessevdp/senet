@@ -11,6 +11,11 @@ public class Input {
 		this.scanner = new Scanner(System.in);
 	}
 	
+	/**
+	 * Prompt the user to select an integer from an array of options
+	 * @param options
+	 * @return selected integer
+	 */
 	public int selectInt (int[] options) {
 		int i;
 		String question = "Choose a number " + getOptionsPrint(options) +" : ";
@@ -30,6 +35,15 @@ public class Input {
 		}
 	}
 	
+	/* ==================================================
+	 * HELPER FUNCTIONS
+	 * ================================================== */
+	
+	/**
+	 * Get a printable string based on a list of options
+	 * @param options
+	 * @return print
+	 */
 	private String getOptionsPrint (int[] options) {
 		String print = "";
 		for (int i = 0; i < options.length; i++) {
