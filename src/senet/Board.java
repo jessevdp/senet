@@ -21,7 +21,7 @@ public class Board {
 	}
 	
 	public void print() {
-		System.out.println("+----------+");
+		System.out.println('\n' + "+----------+");
 		
 		System.out.print('|');
 		for (int i = 0; i < 10; i++) {
