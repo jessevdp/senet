@@ -26,6 +26,9 @@ public class Senet {
 			players[0] = new Player("John", 'x');
 			players[1] = new Player("Jane", 'o');
 		}
+		
+		board = new Board(mode, players[0], players[1]);
+		board.print();
 	}
 	
 	public Player[] determineStarter (String[] names) {
