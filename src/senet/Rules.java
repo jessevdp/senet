@@ -39,6 +39,10 @@ public class Rules {
 		if(checkRule4(opponent, squares, from, amount)) {
 			return 4;
 		}
+		if (checkRule5(player, squares, from, amount)) {
+			return 5;
+		}
+		
 		return 0;
 	}
 	
@@ -94,7 +98,7 @@ public class Rules {
 	}
 	
 	/**
-	 * Checks rule #3
+	 * Checks rule #4
 	 * returns true if failed
 	 * @param opponent
 	 * @param squares
@@ -110,6 +114,23 @@ public class Rules {
 			if (enemies == 3) {
 				return true;
 			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Checks rule #5
+	 * returns true if failed
+	 * @param player
+	 * @param squares
+	 * @param from
+	 * @param amount
+	 * @return failed
+	 */
+	private boolean checkRule5 (Player player, Player[]squares, int from, int amount) {
+		int dest = from + amount;
+		if (squares[dest] == player) {
+			return true;
 		}
 		return false;
 	}
