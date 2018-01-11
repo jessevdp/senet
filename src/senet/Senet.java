@@ -85,7 +85,6 @@ public class Senet {
 			int selection = 9;
 			System.out.println(player.getPrint() + ", because this is the first turn you have to move the pawn on square " + selection + ".");
 			board.move(player, opponent, selection, n);
-			board.print();
 		} else {
 			int[] options = board.getMoves(player, opponent, n);
 			
@@ -93,7 +92,6 @@ public class Senet {
 				int selection = input.selectInt(options, player.getPrint() + ", which pawn do you want to move?");
 				System.out.println(player.getPrint() + ", you selected the pawn on square: " + selection);
 				board.move(player, opponent, selection, n);
-				board.print();
 			} else {
 				input.confirm(player.getPrint() + ", it seems there are no moves possible... Moving on to the next turn");
 			}

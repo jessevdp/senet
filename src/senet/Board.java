@@ -153,25 +153,22 @@ public class Board {
 		
 		if (dest == (30 - 1)) {
 			squares[location] = null;
-			return true;
-		}
-		
-		if (dest == (27 - 1)) {
+		} else if (dest == (27 - 1)) {
 			System.out.println("\nTrapdoor! Sending this pawn back to the beginning...");
 			int i = 0;
 			while (true) {
 				if (squares[i] == null) {
 					squares[i] = player;
 					squares[location] = null;
-					return true;
 				}
 				i += 1;
 			}
+		} else {
+			Player occupant = squares[dest];
+			squares[dest] = player;
+			squares[location] = occupant;
 		}
-		
-		Player occupant = squares[dest];
-		squares[dest] = player;
-		squares[location] = occupant;
+		print();
 		return true;
 	}
 }
