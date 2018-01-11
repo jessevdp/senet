@@ -14,11 +14,14 @@ public class Input {
 	/**
 	 * Prompt the user to select an integer from an array of options
 	 * @param options
+	 * @param message
 	 * @return selected integer
 	 */
-	public int selectInt (int[] options) {
+	public int selectInt (int[] options, String message) {
 		int i;
 		String question = "Choose a number " + getOptionsPrint(options) +" : ";
+		
+		System.out.println('\n' + message);
 		
 		while (true) {
 			try {
