@@ -55,7 +55,7 @@ public class Input {
 			System.out.println('\n' + message);
 		}
 		
-		System.out.print("Press <ENTER> ");
+		System.out.print("Press <ENTER> to confirm ");
 		scanner.nextLine();
 	}
 	
