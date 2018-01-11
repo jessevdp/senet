@@ -81,20 +81,20 @@ public class Senet {
 		input.confirm(player.getPrint() + ", time to throw the dice, are you ready?");
 		System.out.println(player.getPrint() + ", you threw " + n);
 		
-		if (firstTurn) {
-			int selection = 9;
-			System.out.println(player.getPrint() + ", because this is the first turn you have to move the pawn on square " + selection + ".");
+		int[] options = firstTurn ? (new int[]{9}) : board.getMoves(player, opponent, n);
+		int selection = -1;
+		
+		if (options.length == 1) {
+			selection = options[0];
+			System.out.println('\n' + player.getPrint() + ", you have to move the pawn on square " + selection);
+		} else if (options.length > 0) {
+			selection = input.selectInt(options, player.getPrint() + ", which pawn do you want to move?");
+		}
+		
+		if (selection != -1) {
 			board.move(player, opponent, selection, n);
 		} else {
-			int[] options = board.getMoves(player, opponent, n);
-			
-			if (options.length > 0) {
-				int selection = input.selectInt(options, player.getPrint() + ", which pawn do you want to move?");
-				System.out.println(player.getPrint() + ", you selected the pawn on square: " + selection);
-				board.move(player, opponent, selection, n);
-			} else {
-				input.confirm(player.getPrint() + ", it seems there are no moves possible... Moving on to the next turn");
-			}
+			input.confirm(player.getPrint() + ", it seems there are no moves possible... Moving on to the next turn");
 		}
 		
 		if (n == 1 || n == 4 || n == 6) {
