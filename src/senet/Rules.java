@@ -55,7 +55,7 @@ public class Rules {
 		if (checkRule6(opponent, squares, from, amount)) {
 			return 6;
 		}
-		if (checkRule7(player, squares)) {
+		if (checkRule7(player, squares, from, amount)) {
 			return 7;
 		}
 		return 0;
@@ -177,8 +177,14 @@ public class Rules {
 	 * @param squares
 	 * @return failed
 	 */
-	private boolean checkRule7 (Player player, Player[] squares) {
+	private boolean checkRule7 (Player player, Player[] squares, int from, int amount) {
+		int dest = from + amount;
 		ArrayList<Integer> positions = new ArrayList<Integer>();
+		
+		if (!(dest == (30 - 1))) {
+			return false;
+		}
+		
 		for (int i = 0; i < squares.length; i++) {
 			if (squares[i] == player) {
 				positions.add(i);
