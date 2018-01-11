@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Board {
 	private Player[] squares;
 	private ArrayList<Player[]> boards;
+	private Rules rules;
 	
 	public Board (int n, Player b, Player w) {
 		boards = new ArrayList<Player[]>();
@@ -14,6 +15,8 @@ public class Board {
 		boards.add(3, new Player[]{null,null,null,null,null,w,null,null,null,null, null,null,b,null,null,null,null,w,null,null, null,w,null,null,b,b,null,b,b,null});
 		
 		squares = boards.get(n);
+		
+		rules = new Rules();
 	}
 	
 	/**
@@ -91,6 +94,45 @@ public class Board {
 		}
 		
 		return positions;
+	}
+	
+	/**
+	 * Get the locations of the pawns that can be moved
+	 * @param player
+	 * @param opponent
+	 * @param amount
+	 * @return locations
+	 */
+	public int[] getMoves (Player player, Player opponent, int amount) {
+		int [] positions = getPawnPositions(player);
+		int [] options;
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		ArrayList<String> errors = new ArrayList<String>();
+		
+		for (int i = 0; i < positions.length; i++) {
+			int location = positions[i] - 1;
+			int result = rules.check(player, opponent, squares, location, amount);
+			if (result == 0) {
+				list.add(i);
+			} else {
+				errors.add(positions[i] + ": " + rules.get(result));
+			}
+		}
+		
+		// Report pawns that can't be moved
+		if (errors.size() > 0) {
+			System.out.println('\n' + player.getPrint() + ", the following pawns can't be moved:");
+			for (String string : errors) {
+				System.out.println(string);
+			}
+		}
+		
+		// ArrayList<Integer> -> int[]
+		options = new int[list.size()];
+		for (int i = 0; i < options.length; i++) {
+			options[i] = list.get(i).intValue();
+		}
+		return options;
 	}
 	
 }
