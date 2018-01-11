@@ -43,6 +43,10 @@ public class Senet {
 		board = new Board(mode, players[0], players[1]);
 		board.print();
 		
+		if (mode == 0) {
+			playTurn(players[current], players[(current ^ 1)], true);
+		}
+		
 		while (winner == null) {
 			current ^= 1;
 			Player player = players[current];
@@ -63,7 +67,7 @@ public class Senet {
 	 * @param player
 	 * @param opponent
 	 */
-	public void playTurn (Player player, Player opponent) {
+	public void playTurn (Player player, Player opponent, boolean firstTurn) {
 		int n = dice.throwSticks();
 		int[] pawns = board.getPawnPositions(player);
 		
@@ -77,22 +81,32 @@ public class Senet {
 		input.confirm(player.getPrint() + ", time to throw the dice, are you ready?");
 		System.out.println(player.getPrint() + ", you threw " + n);
 		
-		int[] options = board.getMoves(player, opponent, n);
-		
-		if (options.length > 0) {
-			int selection = input.selectInt(options, player.getPrint() + ", which pawn do you want to move?");
-			System.out.println(player.getPrint() + ", you selected the pawn on square: " + selection);
+		if (firstTurn) {
+			int selection = 9;
+			System.out.println(player.getPrint() + ", because this is the first turn you have to move the pawn on square " + selection + ".");
 			board.move(player, opponent, selection, n);
+			board.print();
 		} else {
-			input.confirm(player.getPrint() + ", it seems there are no moves possible... Moving on to the next turn");
+			int[] options = board.getMoves(player, opponent, n);
+			
+			if (options.length > 0) {
+				int selection = input.selectInt(options, player.getPrint() + ", which pawn do you want to move?");
+				System.out.println(player.getPrint() + ", you selected the pawn on square: " + selection);
+				board.move(player, opponent, selection, n);
+				board.print();
+			} else {
+				input.confirm(player.getPrint() + ", it seems there are no moves possible... Moving on to the next turn");
+			}
 		}
-		
-		board.print();
 		
 		if (n == 1 || n == 4 || n == 6) {
 			System.out.println('\n' + player.getPrint() + ", because you threw " + n + " you get another turn!");
 			playTurn(player, opponent);
 		}
+	}
+	
+	private void playTurn (Player player, Player opponent) {
+		playTurn(player, opponent, false);
 	}
 	
 	/* ==================================================
