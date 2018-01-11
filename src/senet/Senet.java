@@ -17,6 +17,9 @@ public class Senet {
 		this.output = new Output();
 	}
 	
+	/**
+	 * Play a game of Senet
+	 */
 	public void play () {
 		int current = 1;
 		
@@ -48,9 +51,18 @@ public class Senet {
 		output.winner(winner);
 	}
 	
+	/**
+	 * Play a turn
+	 * @param player
+	 * @param opponent
+	 */
 	public void playTurn (Player player, Player opponent) {
 		output.turn(player);
 	}
+	
+	/* ==================================================
+	 * HELPER FUNCTIONS
+	 * ================================================== */
 	
 	/**
 	 * Determine the starter of a game
