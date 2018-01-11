@@ -135,4 +135,44 @@ public class Board {
 		return options;
 	}
 	
+	/**
+	 * Move the pawn on a location an amount of squares
+	 * @param player
+	 * @param opponent
+	 * @param location
+	 * @param amount
+	 * @return success
+	 */
+	public boolean move (Player player, Player opponent, int location, int amount) {
+		location = location - 1;
+		int dest = location + amount;
+		int result = rules.check(player, opponent, squares, location, amount);
+		if (result != 0) {
+			return false;
+		}
+		
+		if (dest == (30 - 1)) {
+			squares[location] = null;
+			return true;
+		}
+		
+		if (dest == (27 - 1)) {
+			System.out.println("\nTrapdoor! Sending this pawn back to the beginning...");
+			int i = 0;
+			while (true) {
+				if (squares[i] == null) {
+					squares[i] = player;
+					squares[location] = null;
+					return true;
+				}
+				i += 1;
+			}
+		}
+		
+		Player occupant = squares[dest];
+		squares[dest] = player;
+		squares[location] = occupant;
+		return true;
+	}
+	
 }
