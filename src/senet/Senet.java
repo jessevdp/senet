@@ -6,16 +6,18 @@ public class Senet {
 	Player[] players;
 	
 	Input input;
+	Output output;
 
 	public Senet () {
 		this.dice = new Dice();
 		this.players = new Player[2];
 		
 		this.input = new Input();
+		this.output = new Output();
 	}
 	
 	public void play () {
-		System.out.println("Let's play Senet!");
+		output.intro();
 		
 		int mode = input.selectInt(new int[] {0, 1, 2, 3}, "Before we begin: Would you like to start a normal game (0) or a test position?");
 		
