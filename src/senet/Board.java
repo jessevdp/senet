@@ -113,7 +113,7 @@ public class Board {
 			int location = positions[i] - 1;
 			int result = rules.check(player, opponent, squares, location, amount);
 			if (result == 0) {
-				list.add(i);
+				list.add(positions[i]);
 			} else {
 				errors.add(positions[i] + ": " + rules.get(result));
 			}
