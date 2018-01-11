@@ -174,5 +174,4 @@ public class Board {
 		squares[location] = occupant;
 		return true;
 	}
-	
 }
