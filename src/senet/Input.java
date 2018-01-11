@@ -76,6 +76,7 @@ public class Input {
 			System.out.print("Enter the name of the " + (i + 1) + suffix + " player : ");
 			names[i] = scanner.next();
 		}
+		scanner.nextLine(); // Clear the keyboard buffer
 		return names;
 	}
 	
