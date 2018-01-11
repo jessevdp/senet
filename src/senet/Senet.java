@@ -4,6 +4,7 @@ public class Senet {
 	Dice dice;
 	Board board;
 	Player[] players;
+	Player winner;
 	
 	Input input;
 	Output output;
@@ -17,6 +18,8 @@ public class Senet {
 	}
 	
 	public void play () {
+		int current = 1;
+		
 		output.intro();
 		
 		int mode = input.selectInt(new int[] {0, 1, 2, 3}, "Before we begin: Would you like to start a normal game (0) or a test position?");
@@ -31,6 +34,22 @@ public class Senet {
 		
 		board = new Board(mode, players[0], players[1]);
 		board.print();
+		
+		while (winner == null) {
+			current ^= 1;
+			Player player = players[current];
+			Player oppenent = players[(current ^ 1)]; // XOR (^) to select the other player
+			
+			playTurn(player, oppenent);
+			
+			winner = player; // TODO: remove this (meant to stop infinite loop)
+		}
+		
+		output.winner(winner);
+	}
+	
+	public void playTurn (Player player, Player opponent) {
+		output.turn(player);
 	}
 	
 	/**
