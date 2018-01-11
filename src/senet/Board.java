@@ -17,6 +17,18 @@ public class Board {
 	}
 	
 	/**
+	 * Get the different options for the boards
+	 * @return boards
+	 */
+	public int[] getOptions () {
+		int[] boards = new int[this.boards.size()];
+		for (int i = 0; i < boards.length; i++) {
+			boards[i] = i;
+		}
+		return boards;
+	}
+	
+	/**
 	 * Print the board
 	 */
 	public void print () {

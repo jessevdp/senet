@@ -8,6 +8,8 @@ public class Senet {
 	
 	Input input;
 	Output output;
+	
+	int[] boardoptions;
 
 	public Senet () {
 		this.dice = new Dice();
@@ -15,6 +17,10 @@ public class Senet {
 		
 		this.input = new Input();
 		this.output = new Output();
+		
+		Board temp = new Board(0, new Player("A", 'x'), new Player("B", 'o'));
+		this.boardoptions = temp.getOptions();
+		
 	}
 	
 	/**
@@ -25,7 +31,7 @@ public class Senet {
 		
 		output.intro();
 		
-		int mode = input.selectInt(new int[] {0, 1, 2, 3}, "Before we begin: Would you like to start a normal game (0) or a test position?");
+		int mode = input.selectInt(boardoptions, "Before we begin: Would you like to start a normal game (0) or a test position?");
 		
 		if (mode == 0) {
 			String[] names = input.getNames(players.length);
