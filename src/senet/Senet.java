@@ -57,6 +57,12 @@ public class Senet {
 	 * @param opponent
 	 */
 	public void playTurn (Player player, Player opponent) {
+		int[] pawns = board.getPawnPositions(player);
+		
+		if (pawns.length == 0) {
+			return;
+		}
+		
 		output.turn(player);
 	}
 	
