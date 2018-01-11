@@ -1,5 +1,6 @@
 package senet;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Rules {
@@ -45,7 +46,9 @@ public class Rules {
 		if (checkRule6(opponent, squares, from, amount)) {
 			return 6;
 		}
-		
+		if (checkRule7(player, squares)) {
+			return 7;
+		}
 		return 0;
 	}
 	
@@ -139,7 +142,7 @@ public class Rules {
 	}
 	
 	/**
-	 *  Checks rule #6
+	 * Checks rule #6
 	 * returns true if failed
 	 * @param opponent
 	 * @param squares
@@ -158,4 +161,23 @@ public class Rules {
 		return false;
 	}
 	
+	/**
+	 * Checks rule #7
+	 * returns true if failed
+	 * @param player
+	 * @param squares
+	 * @return failed
+	 */
+	private boolean checkRule7 (Player player, Player[] squares) {
+		ArrayList<Integer> positions = new ArrayList<Integer>();
+		for (int i = 0; i < squares.length; i++) {
+			if (squares[i] == player) {
+				positions.add(i);
+			}
+		}
+		if (positions.get(0) > 19) {
+			return false;
+		}
+		return true;
+	}
 }
