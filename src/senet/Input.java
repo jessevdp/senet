@@ -63,6 +63,17 @@ public class Input {
 		confirm("");
 	}
 	
+	public String[] getNames(int amount) {
+		String[] names = new String[amount];
+		System.out.println(); // blank line
+		for (int i = 0; i < names.length; i++) {
+			String suffix = (i == 0) ? "st" : "th";
+			System.out.print("Enter the name of the " + (i + 1) + suffix + " player : ");
+			names[i] = scanner.next();
+		}
+		return names;
+	}
+	
 	/* ==================================================
 	 * HELPER FUNCTIONS
 	 * ================================================== */
