@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Rules {
 	private HashMap<Integer, String> rules;
 
-	public Rules (String message) {
+	public Rules () {
 		rules = new HashMap<Integer, String>();
 		rules.put(1, "You don't have a pawn on the selected square.");
 		rules.put(2, "You can't move past square 30.");
