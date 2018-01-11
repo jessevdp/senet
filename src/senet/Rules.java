@@ -18,6 +18,15 @@ public class Rules {
 	}
 	
 	/**
+	 * Get a rule by it's number
+	 * @param n
+	 * @return rule
+	 */
+	public String get (int n) {
+		return rules.get(n);
+	}
+	
+	/**
 	 * Check if a move will succeed, returns 0 if it will succeed.
 	 * returns the number of the rule it failed on if it won't succeed.
 	 * @param player
