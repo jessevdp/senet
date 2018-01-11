@@ -162,8 +162,8 @@ public class Rules {
 	private boolean checkRule6 (Player opponent, Player[] squares, int from, int amount) {
 		int dest = from + amount;
 		Player destination = squares[dest];
-		Player before = squares[dest - 1];
-		Player after = squares[dest + 1];
+		Player before = (dest == (1 - 1)) ? null : squares[dest - 1];
+		Player after = (dest == (30 - 1)) ? null : squares[dest + 1];
 		if (destination == opponent && (before == opponent || after == opponent)) {
 			return true;
 		}
