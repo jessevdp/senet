@@ -30,6 +30,9 @@ public class Rules {
 		if (checkRule1(player, squares, from)) {
 			return 1;
 		}
+		if (checkRule2(from, amount)) {
+			return 2;
+		}
 		return 0;
 	}
 	
@@ -38,7 +41,7 @@ public class Rules {
 	 * ================================================== */
 	
 	/**
-	 * Checks rule # 1,
+	 * Checks rule #1,
 	 * returns true if failed
 	 * @param player
 	 * @param squares
@@ -50,6 +53,21 @@ public class Rules {
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * Checks rule #2
+	 * returns true if failed
+	 * @param from
+	 * @param amount
+	 * @return failed
+	 */
+	private boolean checkRule2 (int from, int amount) {
+		int dest = from + amount;
+		if (dest > (30 - 1)) {
+			return true;
+		}
+		return false;
 	}
 	
 }
