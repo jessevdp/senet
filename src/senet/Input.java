@@ -13,6 +13,7 @@ public class Input {
 	
 	/**
 	 * Prompt the user to select an integer from an array of options
+	 * (optionally add a message to display beforehand)
 	 * @param options
 	 * @param message
 	 * @return selected integer
@@ -21,7 +22,9 @@ public class Input {
 		int i;
 		String question = "Choose a number " + getOptionsPrint(options) +" : ";
 		
-		System.out.println('\n' + message);
+		if (message.length() > 0) {
+			System.out.println('\n' + message);
+		}
 		
 		while (true) {
 			try {
@@ -38,15 +41,26 @@ public class Input {
 		}
 	}
 	
+	public int selectInt(int[] options) {
+		return selectInt(options, "");
+	}
+	
 	/**
 	 * Prompt the user to confirm a message by pressing <ENTER>
+	 * (optionally add a message to display beforehand)
 	 * @param message
 	 */
 	public void confirm (String message) {
-		System.out.println('\n' + message);
+		if (message.length() > 0) {
+			System.out.println('\n' + message);
+		}
 		
 		System.out.print("Press <ENTER> ");
 		scanner.nextLine();
+	}
+	
+	public void confirm () {
+		confirm("");
 	}
 	
 	/* ==================================================
