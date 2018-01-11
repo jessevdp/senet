@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Board {
 	private Player[] squares;
 	
-	public Board(int n, Player b, Player w) {
+	public Board (int n, Player b, Player w) {
 		switch (n) {
 		case 1:
 			this.squares = new Player[]{b,w,null,w,null,w,null,b,null,w, null,w,null,w,null,b,w,w,null,w, w,null,b,w,w,w,null,null,null,null};
@@ -22,7 +22,10 @@ public class Board {
 		}
 	}
 	
-	public void print() {
+	/**
+	 * Print the board
+	 */
+	public void print () {
 		System.out.println('\n' + "+----------+");
 		
 		System.out.print('|');
@@ -46,7 +49,12 @@ public class Board {
 		System.out.println("+----------+");
 	}
 	
-	private void printSquare(Player square) {
+	/**
+	 * Prints the character representation of a square
+	 * (helper for print)
+	 * @param square
+	 */
+	private void printSquare (Player square) {
 		if (square == null) {
 			System.out.print('\u00b7');
 			return;
