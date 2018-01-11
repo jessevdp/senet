@@ -20,7 +20,6 @@ public class Senet {
 		
 		Board temp = new Board(0, new Player("A", 'x'), new Player("B", 'o'));
 		this.boardoptions = temp.getOptions();
-		
 	}
 	
 	/**
@@ -123,5 +122,4 @@ public class Senet {
 		players[1] = new Player(names[(player ^ 1)], 'o'); // XOR (^) to select the other name
 		return players;
 	}
-	
 }
