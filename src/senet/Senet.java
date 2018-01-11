@@ -57,6 +57,7 @@ public class Senet {
 	 * @param opponent
 	 */
 	public void playTurn (Player player, Player opponent) {
+		int n = dice.throwSticks();
 		int[] pawns = board.getPawnPositions(player);
 		
 		if (pawns.length == 0) {
@@ -64,6 +65,10 @@ public class Senet {
 		}
 		
 		output.turn(player);
+		board.print();
+		
+		input.confirm(player.getPrint() + ", time to throw the dice, are you ready?");
+		System.out.println(player.getPrint() + ", you threw " + n);
 	}
 	
 	/* ==================================================
