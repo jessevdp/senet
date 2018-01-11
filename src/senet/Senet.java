@@ -45,7 +45,9 @@ public class Senet {
 			
 			playTurn(player, oppenent);
 			
-			winner = player; // TODO: remove this (meant to stop infinite loop)
+			if (board.getPawnPositions(player).length == 0) {
+				winner = player;
+			}
 		}
 		
 		output.winner(winner);
