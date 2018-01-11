@@ -19,4 +19,16 @@ public class Output {
 		System.out.println('\n' + "========================================");
 		System.out.println("It's " + print + " their turn!");
 	}
+	
+	/**
+	 * Announces the winner of a game
+	 * @param player
+	 */
+	public void winner (Player player) {
+		String print = player.getPrint();
+		
+		System.out.println('\n' + "****************************************");
+		System.out.println(print + " won the game!");
+		System.out.println("****************************************");
+	}
 }
