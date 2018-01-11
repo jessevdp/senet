@@ -33,6 +33,11 @@ public class Senet {
 		board.print();
 	}
 	
+	/**
+	 * Determine the starter of a game
+	 * @param names
+	 * @return players (first player in the array starts)
+	 */
 	public Player[] determineStarter (String[] names) {
 		int player = 0;
 		Player[] players = new Player[2];
