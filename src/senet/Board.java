@@ -4,22 +4,16 @@ import java.util.ArrayList;
 
 public class Board {
 	private Player[] squares;
+	private ArrayList<Player[]> boards;
 	
 	public Board (int n, Player b, Player w) {
-		switch (n) {
-		case 1:
-			this.squares = new Player[]{b,w,null,w,null,w,null,b,null,w, null,w,null,w,null,b,w,w,null,w, w,null,b,w,w,w,null,null,null,null};
-			break;
-		case 2:
-			this.squares = new Player[]{null,null,null,null,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null, null,w,w,w,null,null,null,null,b,null};
-			break;
-		case 3:
-			this.squares = new Player[]{null,null,null,null,null,w,null,null,null,null, null,null,b,null,null,null,null,w,null,null, null,w,null,null,b,b,null,b,b,null};
-			break;
-		default:
-			this.squares = new Player[]{w,b,w,b,w,b,w,b,w,null, b,null,null,null,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null};
-			break;
-		}
+		boards = new ArrayList<Player[]>();
+		boards.add(0, new Player[]{w,b,w,b,w,b,w,b,w,null, b,null,null,null,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null});
+		boards.add(1, new Player[]{b,w,null,w,null,w,null,b,null,w, null,w,null,w,null,b,w,w,null,w, w,null,b,w,w,w,null,null,null,null});
+		boards.add(2, new Player[]{null,null,null,null,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null, null,w,w,w,null,null,null,null,b,null});
+		boards.add(3, new Player[]{null,null,null,null,null,w,null,null,null,null, null,null,b,null,null,null,null,w,null,null, null,w,null,null,b,b,null,b,b,null});
+		
+		squares = boards.get(n);
 	}
 	
 	/**
