@@ -63,6 +63,11 @@ public class Input {
 		confirm("");
 	}
 	
+	/**
+	 * Get the names of a variable amount of players
+	 * @param amount
+	 * @return names
+	 */
 	public String[] getNames(int amount) {
 		String[] names = new String[amount];
 		System.out.println(); // blank line
