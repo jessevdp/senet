@@ -4,26 +4,38 @@ import java.util.ArrayList;
 
 public class Board {
 	private Player[] squares;
+	private ArrayList<Player[]> boards;
+	private Rules rules;
 	
-	public Board(int num, Player b, Player w) {
-		switch (num) {
-		case 1:
-			this.squares = new Player[]{b,w,null,w,null,w,null,b,null,w, null,w,null,w,null,b,w,w,null,w, w,null,b,w,w,w,null,null,null,null};
-			break;
-		case 2:
-			this.squares = new Player[]{null,null,null,null,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null, null,w,w,w,null,null,null,null,b,null};
-			break;
-		case 3:
-			this.squares = new Player[]{null,null,null,null,null,w,null,null,null,null, null,null,b,null,null,null,null,w,null,null, null,w,null,null,b,b,null,b,b,null};
-			break;
-		default:
-			this.squares = new Player[]{w,b,w,b,w,b,w,b,w,null, b,null,null,null,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null};
-			break;
-		}
+	public Board (int n, Player b, Player w) {
+		boards = new ArrayList<Player[]>();
+		boards.add(0, new Player[]{w,b,w,b,w,b,w,b,w,null, b,null,null,null,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null});
+		boards.add(1, new Player[]{b,w,null,w,null,w,null,b,null,w, null,w,null,w,null,b,w,w,null,w, w,null,b,w,w,w,null,null,null,null});
+		boards.add(2, new Player[]{null,null,null,null,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null, null,w,w,w,null,null,null,null,b,null});
+		boards.add(3, new Player[]{null,null,null,null,null,w,null,null,null,null, null,null,b,null,null,null,null,w,null,null, null,w,null,null,b,b,null,b,b,null});
+		
+		squares = boards.get(n);
+		
+		rules = new Rules();
 	}
 	
-	public void print() {
-		System.out.println("+----------+");
+	/**
+	 * Get the different options for the boards
+	 * @return boards
+	 */
+	public int[] getOptions () {
+		int[] boards = new int[this.boards.size()];
+		for (int i = 0; i < boards.length; i++) {
+			boards[i] = i;
+		}
+		return boards;
+	}
+	
+	/**
+	 * Print the board
+	 */
+	public void print () {
+		System.out.println('\n' + "+----------+");
 		
 		System.out.print('|');
 		for (int i = 0; i < 10; i++) {
@@ -46,7 +58,12 @@ public class Board {
 		System.out.println("+----------+");
 	}
 	
-	private void printSquare(Player square) {
+	/**
+	 * Prints the character representation of a square
+	 * (helper for print)
+	 * @param square
+	 */
+	private void printSquare (Player square) {
 		if (square == null) {
 			System.out.print('\u00b7');
 			return;
@@ -56,120 +73,102 @@ public class Board {
 	}
 	
 	/**
-	 * Counts the amount of pawns a player has on the board
+	 * Get the locations for all the pawns of a player
 	 * @param player
-	 * @return count
+	 * @return positions
 	 */
-	public int countPawns(Player player) {
-		int count = 0;
+	public int[] getPawnPositions (Player player) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		int[] positions;
+		
 		for (int i = 0; i < squares.length; i++) {
-			if(squares[i] == player) {
-				count += 1;
+			if (squares[i] == player) {
+				list.add(i + 1); // +1 to make up for the fact that the array is 0 based
 			}
 		}
-		return count;
+		
+		// ArrayList<Integer> -> int[]
+		positions = new int[list.size()];
+		for (int i = 0; i < positions.length; i++) {
+			positions[i] = list.get(i).intValue();
+		}
+		
+		return positions;
 	}
 	
 	/**
-	 * Get the locations of the pawns of a player
+	 * Get the locations of the pawns that can be moved
 	 * @param player
-	 * @return A list with the locations
+	 * @param opponent
+	 * @param amount
+	 * @return locations
 	 */
-	public ArrayList<Integer> getPawnLocations(Player player) {
-		ArrayList<Integer> locations = new ArrayList<Integer>();
-		for (int i = 0; i < squares.length; i++) {
-			if(squares[i] == player) {
-				locations.add(i);
+	public int[] getMoves (Player player, Player opponent, int amount) {
+		int [] positions = getPawnPositions(player);
+		int [] options;
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		ArrayList<String> errors = new ArrayList<String>();
+		
+		for (int i = 0; i < positions.length; i++) {
+			int location = positions[i] - 1;
+			int result = rules.check(player, opponent, squares, location, amount);
+			if (result == 0) {
+				list.add(positions[i]);
+			} else {
+				errors.add(positions[i] + ": " + rules.get(result));
 			}
 		}
-		return locations;
+		
+		// Report pawns that can't be moved
+		if (errors.size() > 0) {
+			System.out.println('\n' + player.getPrint() + ", the following pawns can't be moved:");
+			for (String string : errors) {
+				System.out.println(string);
+			}
+		}
+		
+		// ArrayList<Integer> -> int[]
+		options = new int[list.size()];
+		for (int i = 0; i < options.length; i++) {
+			options[i] = list.get(i).intValue();
+		}
+		return options;
 	}
 	
 	/**
-	 * Move the pawn on a given location a certain amount of pawns
+	 * Move the pawn on a location an amount of squares
+	 * @param player
+	 * @param opponent
 	 * @param location
 	 * @param amount
-	 * @param player
-	 * @return success status of the move
+	 * @return success
 	 */
-	public boolean move(int location, int amount, Player player) {
+	public boolean move (Player player, Player opponent, int location, int amount) {
+		location = location - 1;
 		int dest = location + amount;
-		
-		if (dest > (squares.length - 1)) { // -1 to compensate for the fact that the array is 0 based
-			System.out.println("\nOeps, not possible. That move would go off the board...");
+		int result = rules.check(player, opponent, squares, location, amount);
+		if (result != 0) {
 			return false;
 		}
 		
-		int enemies = 0;
-		for (int i = (location + 1); i < dest; i++) {
-			enemies = (squares[i] != null && squares[i] != player) ? (enemies + 1) : 0;
-			
-			if (enemies == 3) {
-				System.out.println("\nOeps, not possible. You can't jump over 3 enemy pawns in a row...");
-				return false;
-			}
-		}
-		
-		Player destination = squares[dest];
-		
-		if (destination == player) {
-			System.out.println("\nOeps, not possible. One of your own pawns occupies square " + (dest + 1) + "...");
-			return false;
-		}
-		
-		if (destination != null && ((squares[dest - 1] != null && squares[dest - 1] != player) || (squares[dest + 1] != null && squares[dest + 1] != player))) {
-			System.out.println("\nOeps, not possible. Square " + (dest + 1) + " contains a safe pawn...");
-			return false;
-		}
-		
-		if (destination != null && (dest == (26 - 1) || dest == (28 - 1) || dest == (29 - 1))) {
-			System.out.println("\nOeps, not possible. You can't attack a pawn on square " + (dest + 1) + "...");
-			return false;
-		}
-		
-		if (dest == (squares.length - 1) // -1 to compensate for the fact that the array is 0 based
-				&& !allPawnsInLastRow(player)) {
-			System.out.println("\nOeps, not possible. Not all of your pawns have made it to the final row yet...");
-			return false;
-		}
-		
-		if (dest == (squares.length - 1)) { // -1 to compensate for the fact that the array is 0 based
+		if (dest == (30 - 1)) {
 			squares[location] = null;
-			return true;
-		}
-		
-		if (dest == (27 - 1)) { // -1 to compensate for the fact that the array is 0 based
+		} else if (dest == (27 - 1)) {
 			System.out.println("\nTrapdoor! Sending this pawn back to the beginning...");
-			
 			int i = 0;
 			while (true) {
-				if (i >= squares.length) {
-					System.out.println("\nOeps, not possible.");
-					return false;
-				}
 				if (squares[i] == null) {
 					squares[i] = player;
 					squares[location] = null;
-					return true;
 				}
-				
 				i += 1;
 			}
+		} else {
+			Player occupant = squares[dest];
+			squares[dest] = player;
+			squares[location] = occupant;
 		}
-		
-		// Swap the destination with the current location
-		Player occupant = squares[dest];
-		squares[dest] = player;
-		squares[location] = occupant;
+		print();
 		return true;
-	}
-	
-	private boolean allPawnsInLastRow(Player player) {
-		ArrayList<Integer> pawns = getPawnLocations(player);
-		int first = pawns.get(0);
-		if (first > 19) {
-			return true;
-		}
-		return false;
 	}
 }
