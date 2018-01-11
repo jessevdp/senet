@@ -71,6 +71,11 @@ public class Senet {
 		
 		input.confirm(player.getPrint() + ", time to throw the dice, are you ready?");
 		System.out.println(player.getPrint() + ", you threw " + n);
+		
+		if (n == 1 || n == 4 || n == 6) {
+			System.out.println('\n' + player.getPrint() + ", because you threw " + n + " you get another turn!");
+			playTurn(player, opponent);
+		}
 	}
 	
 	/* ==================================================
