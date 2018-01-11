@@ -33,6 +33,9 @@ public class Rules {
 		if (checkRule2(from, amount)) {
 			return 2;
 		}
+		if(checkRule3(opponent, squares, from, amount)) {
+			return 3;
+		}
 		return 0;
 	}
 	
@@ -65,6 +68,23 @@ public class Rules {
 	private boolean checkRule2 (int from, int amount) {
 		int dest = from + amount;
 		if (dest > (30 - 1)) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Checks rule #3
+	 * returns true if failed
+	 * @param opponent
+	 * @param squares
+	 * @param from
+	 * @param amount
+	 * @return failed
+	 */
+	private boolean checkRule3 (Player opponent, Player[] squares, int from, int amount) {
+		int dest = from + amount;
+		if (squares[dest] == opponent && (dest == (26 - 1) || dest == (28 - 1) || dest == (29 - 1))) {
 			return true;
 		}
 		return false;
