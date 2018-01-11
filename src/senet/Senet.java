@@ -14,7 +14,7 @@ public class Senet {
 	}
 	
 	public void play () {
-		
+		output.intro();
 	}
 	
 }
