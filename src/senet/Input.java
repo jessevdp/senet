@@ -35,6 +35,17 @@ public class Input {
 		}
 	}
 	
+	/**
+	 * Prompt the user to confirm a message by pressing <ENTER>
+	 * @param message
+	 */
+	public void confirm (String message) {
+		System.out.println('\n' + message);
+		
+		System.out.print("Press <ENTER> ");
+		scanner.nextLine();
+	}
+	
 	/* ==================================================
 	 * HELPER FUNCTIONS
 	 * ================================================== */
