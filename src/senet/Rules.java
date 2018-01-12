@@ -124,7 +124,8 @@ public class Rules {
 	private boolean checkRule4 (Player opponent, Player[] squares, int from, int amount) {
 		int dest = from + amount;
 		int enemies = 0;
-		for (int i = (from + 1); i < dest; i++) {
+		int n = (amount > 0) ? 1 : -1;
+		for (int i = (from + n); i < dest; i += n) {
 			enemies = (squares[i] == opponent) ? (enemies + 1) : 0;
 			if (enemies == 3) {
 				return true;

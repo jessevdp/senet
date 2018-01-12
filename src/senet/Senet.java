@@ -84,6 +84,12 @@ public class Senet {
 		int[] options = firstTurn ? (new int[]{9}) : board.getMoves(player, opponent, n);
 		int selection = -1;
 		
+		if (options.length == 0) {
+			System.out.println('\n' + player.getPrint() + ", it seems no forward moves are possible, attempting backwards moves.");
+			n = n * -1;
+			options = board.getMoves(player, opponent, n);
+		}
+		
 		if (options.length == 1) {
 			selection = options[0];
 			System.out.println('\n' + player.getPrint() + ", you have to move the pawn on square " + selection);
