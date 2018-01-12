@@ -9,7 +9,7 @@ public class Rules {
 	public Rules () {
 		rules = new HashMap<Integer, String>();
 		rules.put(1, "You don't have a pawn on the selected square.");
-		rules.put(2, "You can't move past square 30.");
+		rules.put(2, "You can't move off the board.");
 		rules.put(3, "You can't attack a pawn on square 26, 28, or 29.");
 		rules.put(4, "You can't jump over 3 enemy pawns in a row.");
 		rules.put(5, "One of your own pawns occupies the destination square.");
@@ -89,7 +89,7 @@ public class Rules {
 	 */
 	private boolean checkRule2 (int from, int amount) {
 		int dest = from + amount;
-		if (dest > (30 - 1)) {
+		if (dest > (30 - 1) || (dest < 0)) {
 			return true;
 		}
 		return false;
@@ -124,7 +124,8 @@ public class Rules {
 	private boolean checkRule4 (Player opponent, Player[] squares, int from, int amount) {
 		int dest = from + amount;
 		int enemies = 0;
-		for (int i = (from + 1); i < dest; i++) {
+		int n = (amount > 0) ? 1 : -1;
+		for (int i = (from + n); i < dest; i += n) {
 			enemies = (squares[i] == opponent) ? (enemies + 1) : 0;
 			if (enemies == 3) {
 				return true;
