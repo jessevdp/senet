@@ -124,8 +124,15 @@ public class Senet {
 	 * @return players (first player in the array starts)
 	 */
 	public Player[] determineStarter (String[] names) {
+		boolean computer = false;
 		int player = 0;
 		Player[] players = new Player[2];
+		
+		if (names.length < 2) {
+			computer = true;
+			String[] temp = new String[] {names[0], "Computer"};
+			names = temp;
+		}
 		
 		System.out.println(); // blank line
 		while (true) {
@@ -138,7 +145,7 @@ public class Senet {
 		}
 		System.out.println('\n' + names[player] + " starts the game!");
 		players[0] = new Player(names[player], 'x');
-		players[1] = new Player(names[(player ^ 1)], 'o'); // XOR (^) to select the other name
+		players[1] = new Player(names[(player ^ 1)], 'o', computer); // XOR (^) to select the other name
 		return players;
 	}
 }
