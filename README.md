@@ -9,4 +9,4 @@ My version of the ancient game of Senet. This project is for a school assignment
 This project was created using the [eclipse](https://www.eclipse.org/) IDE and was only ever tested using that IDE.
 
 # License & Disclaimer
-This project is open-sourced under the MIT Licence (see [LICENSE](LICENSE) for the full license). So within some limits, you can do with the code whatever you want. The software is provided as is. It might work as expected—or not. Just don't blame me.
+This project is open-sourced under the MIT License (see [LICENSE](LICENSE) for the full license). So within some limits, you can do with the code whatever you want. The software is provided as is. It might work as expected—or not. Just don't blame me.
