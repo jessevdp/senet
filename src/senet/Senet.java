@@ -112,7 +112,7 @@ public class Senet {
 		if (selection != -1) {
 			board.move(player, opponent, selection, n);
 		} else {
-			input.confirm(player.getPrint() + ", it seems there are no moves possible... Moving on to the next turn");
+			input.confirm("It seems there are no moves possible... Moving on to the next turn");
 		}
 		
 		if (n == 1 || n == 4 || n == 6) {
