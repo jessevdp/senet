@@ -35,7 +35,7 @@ public class Senet {
 		int mode = input.selectInt(boardoptions, "Before we begin: Would you like to start a normal game (0) or a test position?");
 		
 		if (mode == 0) {
-			int amount = input.selectInt(new int[] {1, 2}, "How many players would like to play?");
+			int amount = input.selectInt(new int[] {0, 1, 2}, "How many players would like to play?");
 			String[] names = input.getNames(amount);
 			players = determineStarter(names);
 		} else {
