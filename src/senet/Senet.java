@@ -1,5 +1,7 @@
 package senet;
 
+import java.util.Random;
+
 public class Senet {
 	Dice dice;
 	Board board;
@@ -79,7 +81,9 @@ public class Senet {
 		output.turn(player);
 		board.print();
 		
-		input.confirm(player.getPrint() + ", time to throw the dice, are you ready?");
+		if (!player.isComputer()) {
+			input.confirm(player.getPrint() + ", time to throw the dice, are you ready?");
+		}
 		System.out.println(player.getPrint() + ", you threw " + n);
 		
 		int[] options = firstTurn ? (new int[]{9}) : board.getMoves(player, opponent, n);
@@ -95,7 +99,14 @@ public class Senet {
 			selection = options[0];
 			System.out.println('\n' + player.getPrint() + ", you have to move the pawn on square " + selection);
 		} else if (options.length > 0) {
-			selection = input.selectInt(options, player.getPrint() + ", which pawn do you want to move?");
+			if (player.isComputer()) {
+				Random random = new Random();
+				int a = random.nextInt(options.length);
+				selection = options[a];
+				System.out.println('\n' + player.getPrint() + ", wants to move the pawn on square " + selection);
+			} else {
+				selection = input.selectInt(options, player.getPrint() + ", which pawn do you want to move?");
+			}
 		}
 		
 		if (selection != -1) {
