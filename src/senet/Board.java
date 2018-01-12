@@ -160,6 +160,7 @@ public class Board {
 				if (squares[i] == null) {
 					squares[i] = player;
 					squares[location] = null;
+					break;
 				}
 				i += 1;
 			}
