@@ -157,9 +157,13 @@ public class Board {
 			System.out.println("\nTrapdoor! Sending this pawn back to the beginning...");
 			int i = 0;
 			while (true) {
+				if (i == squares.length) {
+					return false;
+				}
 				if (squares[i] == null) {
 					squares[i] = player;
 					squares[location] = null;
+					break;
 				}
 				i += 1;
 			}
