@@ -1,5 +1,7 @@
 package senet;
 
+import java.util.Random;
+
 public class Senet {
 	Dice dice;
 	Board board;
@@ -33,7 +35,8 @@ public class Senet {
 		int mode = input.selectInt(boardoptions, "Before we begin: Would you like to start a normal game (0) or a test position?");
 		
 		if (mode == 0) {
-			String[] names = input.getNames(players.length);
+			int amount = input.selectInt(new int[] {0, 1, 2}, "How many players would like to play?");
+			String[] names = input.getNames(amount);
 			players = determineStarter(names);
 		} else {
 			players[0] = new Player("John", 'x');
@@ -78,7 +81,9 @@ public class Senet {
 		output.turn(player);
 		board.print();
 		
-		input.confirm(player.getPrint() + ", time to throw the dice, are you ready?");
+		if (!player.isComputer()) {
+			input.confirm(player.getPrint() + ", time to throw the dice, are you ready?");
+		}
 		System.out.println(player.getPrint() + ", you threw " + n);
 		
 		int[] options = firstTurn ? (new int[]{9}) : board.getMoves(player, opponent, n);
@@ -94,13 +99,20 @@ public class Senet {
 			selection = options[0];
 			System.out.println('\n' + player.getPrint() + ", you have to move the pawn on square " + selection);
 		} else if (options.length > 0) {
-			selection = input.selectInt(options, player.getPrint() + ", which pawn do you want to move?");
+			if (player.isComputer()) {
+				Random random = new Random();
+				int a = random.nextInt(options.length);
+				selection = options[a];
+				System.out.println('\n' + player.getPrint() + ", wants to move the pawn on square " + selection);
+			} else {
+				selection = input.selectInt(options, player.getPrint() + ", which pawn do you want to move?");
+			}
 		}
 		
 		if (selection != -1) {
 			board.move(player, opponent, selection, n);
 		} else {
-			input.confirm(player.getPrint() + ", it seems there are no moves possible... Moving on to the next turn");
+			input.confirm("It seems there are no moves possible... Moving on to the next turn");
 		}
 		
 		if (n == 1 || n == 4 || n == 6) {
@@ -126,6 +138,23 @@ public class Senet {
 		int player = 0;
 		Player[] players = new Player[2];
 		
+		String[] temp = new String[2];
+		boolean[] computer = new boolean[2];
+		int computers = 0;
+		
+		for (int i = 0; i < temp.length; i++) {
+			if(i >= names.length) {
+				computers++;
+				temp[i] = "Computer" + computers;
+				computer[i]  = true;
+			} else {
+				temp[i] = names[i];
+				computer[i] = false;
+			}
+		}
+		
+		names = temp;
+		
 		System.out.println(); // blank line
 		while (true) {
 			int n = dice.throwSticks();
@@ -136,8 +165,8 @@ public class Senet {
 			player ^= 1; // XOR switch
 		}
 		System.out.println('\n' + names[player] + " starts the game!");
-		players[0] = new Player(names[player], 'x');
-		players[1] = new Player(names[(player ^ 1)], 'o'); // XOR (^) to select the other name
+		players[0] = new Player(names[player], 'x', computer[player]);
+		players[1] = new Player(names[(player ^ 1)], 'o', computer[(player ^ 1)]); // XOR (^) to select the other name
 		return players;
 	}
 }
