@@ -122,9 +122,24 @@ public class Rules {
 	 * @return failed
 	 */
 	private boolean checkRule4 (Player opponent, Player[] squares, int from, int amount) {
+		if (amount < 0) {
+			return checkRule4Backwards(opponent, squares, from, amount);
+		}
 		int dest = from + amount;
 		int enemies = 0;
 		for (int i = (from + 1); i < dest; i++) {
+			enemies = (squares[i] == opponent) ? (enemies + 1) : 0;
+			if (enemies == 3) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean checkRule4Backwards (Player opponent, Player[] squares, int from, int amount) {
+		int dest = from + amount;
+		int enemies = 0;
+		for (int i = (from - 1); i > dest; i--) {
 			enemies = (squares[i] == opponent) ? (enemies + 1) : 0;
 			if (enemies == 3) {
 				return true;
